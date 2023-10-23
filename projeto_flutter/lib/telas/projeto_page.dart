@@ -1,16 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:app_flutter/telas/organizacao_page.dart';
+import 'package:flutter/material.dart';import 'package:flutter/material.dart';
+import 'package:app_flutter/telas/login_page.dart';
+import 'package:app_flutter/telas/perfil_page.dart';
 
 void main() {
-  runApp(DetalhesProjetoPage(Projeto(
-    "Nome do Projeto",
-    "Descrição do Projeto",
-    "Nome da Organização",
-    "Endereço do Projeto",
-    DateTime.now(),
-    DateTime.now(),
-    true,
-  )));
+  runApp(MaterialApp(
+    home: DetalhesProjetoPage(
+      Projeto(
+        "Nome do Projeto",
+        "Descrição do Projeto",
+        "Nome da Organização",
+        "Endereço do Projeto",
+        DateTime.now(),
+        DateTime.now(),
+        true,
+      ),
+    ),
+  ));
 }
 
 class Projeto {
@@ -23,13 +28,14 @@ class Projeto {
   final bool statusLeitura;
 
   Projeto(
-      this.nome,
-      this.descricao,
-      this.organizacao,
-      this.endereco,
-      this.dataCriacao,
-      this.dataInicio,
-      this.statusLeitura);
+    this.nome,
+    this.descricao,
+    this.organizacao,
+    this.endereco,
+    this.dataCriacao,
+    this.dataInicio,
+    this.statusLeitura,
+  );
 }
 
 class DetalhesProjetoPage extends StatelessWidget {
@@ -41,88 +47,156 @@ class DetalhesProjetoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detalhes do Projeto"),
+        automaticallyImplyLeading: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Expanded(
+              child: Center(
+                child: Text(
+                  "Seu Projeto",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            PopupMenuButton(
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(
+                    child: Row(
+                      children: [
+                        Icon(Icons.person, color: Colors.blue),
+                        SizedBox(width: 8),
+                        Text("Perfil", style: TextStyle(color: Colors.blue)),
+                      ],
+                    ),
+                    value: "perfil",
+                  ),
+                  PopupMenuItem(
+                    child: Row(
+                      children: [
+                        Icon(Icons.exit_to_app, color: Colors.red),
+                        SizedBox(width: 8),
+                        Text("Sair", style: TextStyle(color: Colors.red)),
+                      ],
+                    ),
+                    value: "sair",
+                  ),
+                ];
+              },
+              onSelected: (value) {
+                if (value == "perfil") {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaPerfil()));
+                } else if (value == "sair") {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaDeLogin()));
+                }
+              },
+            ),
+          ],
+        ),
       ),
       body: Center(
-        child: Card(
-          margin: EdgeInsets.all(16),
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
-                Text(
-                  "Nome do Projeto",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
+                Icon(Icons.business, size: 36, color: Colors.blue),
+                SizedBox(width: 8),
                 Text(
                   projeto.nome,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 16),
-                Text(
-                  "Descrição",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              children: <Widget>[
+                Icon(Icons.description, size: 36, color: Colors.green),
+                SizedBox(width: 8),
                 Text(
                   projeto.descricao,
                   style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(height: 16),
-                Text(
-                  "Organização",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              children: <Widget>[
+                Icon(Icons.people, size: 36, color: Colors.orange),
+                SizedBox(width: 8),
                 Text(
                   projeto.organizacao,
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "Endereço de Execução",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  projeto.endereco,
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "Data de Criação",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  projeto.dataCriacao.toString(),
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "Data de Início",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  projeto.dataInicio.toString(),
-                  style: TextStyle(fontSize: 18),
-                ),
-                SizedBox(height: 16),
-                Text(
-                  "Status de Leitura",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  projeto.statusLeitura ? 'Lido' : 'Não lido',
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
-          ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              children: <Widget>[
+                Icon(Icons.location_on, size: 36, color: Colors.red),
+                SizedBox(width: 8),
+                Text(
+                  projeto.endereco,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              children: <Widget>[
+                Icon(Icons.date_range, size: 36, color: Colors.purple),
+                SizedBox(width: 8),
+                Text(
+                  "Data de Criação: ${projeto.dataCriacao.toLocal()}",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              children: <Widget>[
+                Icon(Icons.date_range, size: 36, color: Colors.purple),
+                SizedBox(width: 8),
+                Text(
+                  "Data de Início: ${projeto.dataInicio.toLocal()}",
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              children: <Widget>[
+                Icon(Icons.book, size: 36, color: projeto.statusLeitura ? Colors.green : Colors.red),
+                SizedBox(width: 8),
+                Text(
+                  "Status de Leitura: ${projeto.statusLeitura ? 'Lido' : 'Não Lido'}",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Adicione ação para o botão "Ver Mapa"
+              },
+              child: Text("Ver Mapa"),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Adicione ação para o botão "Documentos"
+              },
+              child: Text("Documentos"),
+            ),
+          ],
         ),
       ),
     );

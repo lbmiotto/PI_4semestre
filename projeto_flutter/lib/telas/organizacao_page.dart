@@ -58,7 +58,7 @@ class OrganizacaoPage extends StatelessWidget {
             Expanded(
               child: Center(
                 child: Text(
-                  "Organização Nome",
+                  "Sua Organização",
                   style: TextStyle(fontSize: 20),
                 ),
               ),
