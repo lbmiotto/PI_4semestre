@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:app_flutter/telas/login_page.dart';
 import 'package:app_flutter/telas/perfil_page.dart';
+import 'package:app_flutter/telas/projeto_page.dart';
 
 void main() {
   runApp(MinhaApp());
-}
-
-class Projeto {
-  final String nome;
-  final String descricao;
-
-  Projeto(this.nome, this.descricao);
 }
 
 class MinhaApp extends StatelessWidget {
@@ -24,9 +18,33 @@ class MinhaApp extends StatelessWidget {
 
 class OrganizacaoPage extends StatelessWidget {
   final List<Projeto> projetos = [
-    Projeto("Projeto 1", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-    Projeto("Projeto 2", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-    Projeto("Projeto 3", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+    Projeto(
+    "Projeto 1",
+    "Descrição do Projeto 1",
+    "Nome da Organização 1",
+    "Endereço do Projeto 1",
+    DateTime.now(),
+    DateTime.now(),
+    true,
+  ),
+  Projeto(
+    "Projeto 2",
+    "Descrição do Projeto 2",
+    "Nome da Organização 2",
+    "Endereço do Projeto 2",
+    DateTime.now(),
+    DateTime.now(),
+    true,
+  ),
+  Projeto(
+    "Projeto 3",
+    "Descrição do Projeto 3",
+    "Nome da Organização 3",
+    "Endereço do Projeto 3",
+    DateTime.now(),
+    DateTime.now(),
+    true,
+  ),
   ];
 
   @override
@@ -103,20 +121,6 @@ class OrganizacaoPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.grey[200],
                       ),
-                      child: Row(
-                        children: <Widget>[
-                          Icon(Icons.search),
-                          SizedBox(width: 10),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Pesquisar...",
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ],
@@ -164,37 +168,6 @@ class OrganizacaoPage extends StatelessWidget {
                   ),
                 );
               }).toList(),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DetalhesProjetoPage extends StatelessWidget {
-  final Projeto projeto;
-
-  DetalhesProjetoPage(this.projeto);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Detalhes do Projeto"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Nome do Projeto: ${projeto.nome}",
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 16),
-            Text(
-              "Descrição: ${projeto.descricao}",
-              style: TextStyle(fontSize: 16),
             ),
           ],
         ),
