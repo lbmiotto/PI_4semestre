@@ -20,42 +20,56 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
     // Faça o processamento do login aqui
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-        ),
-        body: Center(
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+      ),
+      body: Center(
+        child: Container(
+          width: 400.0,
+          height: 600.0,
+          margin: EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 247, 242, 242),
+            border: Border.all(
+              color: Color.fromARGB(255, 161, 161, 161),
+              width: 2.0,
+            ),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.only(bottom: 100.0, top: 30.0),
+                margin: EdgeInsets.only(bottom: 0, top: 0),
                 child: Image.asset(
                   'assets/img/logotipo_6ddrones.png',
                   width: 200.0,
                   height: 200.0,
                 ),
               ),
-              Padding(
+             
+              Container(
+                margin: EdgeInsets.only(bottom: 30.0, top: 0.0),
                 padding: EdgeInsets.symmetric(horizontal: 30.0),
                 child: SizedBox(
+                  height: 50.0,
                   width: 300.0,
                   child: TextFormField(
                     key: Key('loginField'),
                     controller: loginController,
                     decoration: InputDecoration(
-                      labelText: 'Login',
+                      labelText: 'E-mail',
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 20.0),
-              Padding(
+              Container(
+                margin: EdgeInsets.only(bottom: 30.0, top: 0.0),
                 padding: EdgeInsets.symmetric(horizontal: 30.0),
                 child: SizedBox(
+                  height: 60.0,
                   width: 300.0,
                   child: TextFormField(
                     key: Key('senhaField'),
@@ -92,7 +106,8 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.0), // Espaçamento maior
+              SizedBox(height: 30.0),
+              
               TextButton(
                 onPressed: () {
                   // Coloque aqui o código a ser executado quando o texto for clicado
@@ -110,6 +125,8 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
+}
+
