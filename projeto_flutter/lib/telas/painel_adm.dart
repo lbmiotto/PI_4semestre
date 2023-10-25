@@ -70,60 +70,98 @@ class PanelAdm extends StatelessWidget {
           ],
         ),
       ),
-      body: Center(
-        child: Column(
+          
+        body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarUsuario()));
-              },
-              child: Container(
-                width: 350,
-                height: 100,
-                child: Center(
-                  child: Text(
-                    "Visualizar Usuário",
-                    style: TextStyle(fontSize: 24),
+
+              Expanded(
+              child: Column(
+              children: <Widget>[
+                  SizedBox(height: 50),
+                    Container(
+                      width: 700,
+                      height: 400,
+                      margin: EdgeInsets.only(left: 16.0),
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          border: Border.all(
+                            color: Colors.black, // Cor da borda
+                            width: 2.0, // Largura da borda
+                          ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "aaaaaaaaaaaaaaaaaa",
+                          style: TextStyle(fontSize: 24),
+                        ),
+                ),
+              ),
+              
+                
+            ],
+            ),
+              ),
+
+
+            Expanded(
+              
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 60),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarUsuario()));
+                    },
+                    child: Container(
+                      
+                      width: 350,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          "Visualizar Usuário",
+                          style: TextStyle(fontSize: 24),
+                        ),
+                      ),
+                    ),
                   ),
+                  SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarOrganizacao()));
+                    },
+                    child: Container(
+                      width: 350,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          "Visualizar Organização",
+                          style: TextStyle(fontSize: 24),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarProjetos()));
+                    },
+                    child: Container(
+                      width: 350,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          "Visualizar Projetos",
+                          style: TextStyle(fontSize: 24),
+                        ),
                 ),
               ),
             ),
-            SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarOrganizacao()));
-              },
-              child: Container(
-                width: 350,
-                height: 100,
-                child: Center(
-                  child: Text(
-                    "Visualizar Organização",
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
-              ),
+            ],
             ),
-            SizedBox(height: 32),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => VisualizarProjetos()));
-              },
-              child: Container(
-                width: 350,
-                height: 100,
-                child: Center(
-                  child: Text(
-                    "Visualizar Projetos",
-                    style: TextStyle(fontSize: 24),
-                  ),
-                ),
-              ),
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
