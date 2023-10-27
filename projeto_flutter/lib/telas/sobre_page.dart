@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TelasTeste(),
+      home: SobrePage(),
     );
   }
 }
 
-class TelasTeste extends StatelessWidget {
+class SobrePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -66,19 +66,15 @@ class TelasTeste extends StatelessWidget {
                   color: Colors.white,
                   child: ListView(
                     children: <Widget>[
-                      ListTile( // ínicio
+                      ListTile(
                         leading: Icon(Icons.home),
                         title: Text('Início'),
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => InicioPage(),
-                            ),
-                          );
+                          // Ação ao selecionar "Início" no Drawer
+                          // Adicione sua ação aqui
                         },
                       ),
-                      ListTile( // Ver Perfil
+                      ListTile(
                         leading: Icon(Icons.person),
                         title: Text('Ver Perfil'),
                         onTap: () {
@@ -86,7 +82,7 @@ class TelasTeste extends StatelessWidget {
                           // Adicione sua ação aqui
                         },
                       ),
-                      ListTile( // Organizações
+                      ListTile(
                         leading: Icon(Icons.business),
                         title: Text('Organizações'),
                         onTap: () {
@@ -94,7 +90,7 @@ class TelasTeste extends StatelessWidget {
                           // Adicione sua ação aqui
                         },
                       ),
-                      ListTile( // Sobre
+                      ListTile(
                         leading: Icon(Icons.info),
                         title: Text('Sobre'),
                         onTap: () {
@@ -107,7 +103,7 @@ class TelasTeste extends StatelessWidget {
                         },
                       ),
                       Divider(),
-                      ListTile( // Icone Sair
+                      ListTile(
                         title: Text(
                           'Sair',
                           style: TextStyle(
@@ -137,7 +133,38 @@ class TelasTeste extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text("Bem-vindo ao meu aplicativo!"),
+        child: Column(
+          children: <Widget>[
+            // Imagem
+            Image.asset(
+              'img/sobre_globo.png',
+              width: 200.0,
+              height: 200.0,
+            ),
+            SizedBox(height: 20),
+            Container(
+              margin: EdgeInsets.all(100),
+              child: Text(
+                'Bem-vindo ao sistema, a solução abrangente para gerenciar organizações e projetos de forma eficaz. Com nossa plataforma intuitiva, você pode criar, visualizar e manter informações detalhadas sobre organizações, ao mesmo tempo que simplifica o planejamento, execução e acompanhamento de projetos, tudo em um único lugar. Oferecemos integração total, suporte de qualidade e a visão de tornar o gerenciamento colaborativo acessível a todos. Estamos à disposição para ajudar.',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => InicioPage(),
+                  ),
+                );
+              },
+              child: Text('Ir para a página de início'),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TelasTeste(),
+      home: InicioPage(),
     );
   }
 }
 
-class TelasTeste extends StatelessWidget {
+class InicioPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -70,12 +70,8 @@ class TelasTeste extends StatelessWidget {
                         leading: Icon(Icons.home),
                         title: Text('Início'),
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => InicioPage(),
-                            ),
-                          );
+                          // Ação ao selecionar "Início" no Drawer
+                          // Adicione sua ação aqui
                         },
                       ),
                       ListTile( // Ver Perfil
