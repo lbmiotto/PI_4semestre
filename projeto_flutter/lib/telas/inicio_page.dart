@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:app_flutter/telas/login_page.dart';
-import 'package:app_flutter/telas/inicio_page.dart';
 import 'package:app_flutter/telas/perfil_page.dart';
 import 'package:app_flutter/telas/organizacao_page.dart';
 import 'package:app_flutter/telas/sobre_page.dart';
@@ -70,24 +69,36 @@ class InicioPage extends StatelessWidget {
                         leading: Icon(Icons.home),
                         title: Text('Início'),
                         onTap: () {
-                          // Ação ao selecionar "Início" no Drawer
-                          // Adicione sua ação aqui
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => InicioPage(),
+                            ),
+                          );
                         },
                       ),
                       ListTile( // Ver Perfil
                         leading: Icon(Icons.person),
                         title: Text('Ver Perfil'),
                         onTap: () {
-                          // Ação ao selecionar "Ver Perfil" no Drawer
-                          // Adicione sua ação aqui
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaginaPerfil(),
+                            ),
+                          );
                         },
                       ),
                       ListTile( // Organizações
                         leading: Icon(Icons.business),
                         title: Text('Organizações'),
                         onTap: () {
-                          // Ação ao selecionar "Organizações" no Drawer
-                          // Adicione sua ação aqui
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OrganizacaoPage(),
+                            ),
+                          );
                         },
                       ),
                       ListTile( // Sobre

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:app_flutter/telas/login_page.dart';
+import 'package:app_flutter/telas/inicio_page.dart';
+import 'package:app_flutter/telas/organizacao_page.dart';
+import 'package:app_flutter/telas/sobre_page.dart';
 
 void main() {
-  runApp(MinhaApp());
+  runApp(MyApp());
 }
 
-class MinhaApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,64 +18,140 @@ class MinhaApp extends StatelessWidget {
 }
 
 class PaginaPerfil extends StatelessWidget {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        title: Text(
-          "Seu Perfil",
-          style: TextStyle(fontSize: 20),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
         ),
-        centerTitle: true,
-        actions: [
-          PopupMenuButton(
-            itemBuilder: (BuildContext context) {
-              return [
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      IconTheme(
-                        data: IconThemeData(color: Colors.black),
-                        child: Icon(Icons.edit),
+      ),
+      drawer: Drawer(
+        child: Container(
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: Text(
+                  'Nome',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                accountEmail: Text(
+                  'seu.email@example.com',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    Icons.person,
+                    size: 60,
+                    color: Color(0xFF4E7CBF),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  child: ListView(
+                    children: <Widget>[
+                      ListTile( // ínicio
+                        leading: Icon(Icons.home),
+                        title: Text('Início'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => InicioPage(),
+                            ),
+                          );
+                        },
                       ),
-                      SizedBox(width: 8),
-                      Text("Editar"),
+                      ListTile( // Ver Perfil
+                        leading: Icon(Icons.person),
+                        title: Text('Ver Perfil'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaginaPerfil(),
+                            ),
+                          );
+                        },
+                      ),
+                      ListTile( // Organizações
+                        leading: Icon(Icons.business),
+                        title: Text('Organizações'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OrganizacaoPage(),
+                            ),
+                          );
+                        },
+                      ),
+                      ListTile( // Sobre
+                        leading: Icon(Icons.info),
+                        title: Text('Sobre'),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SobrePage(),
+                            ),
+                          );
+                        },
+                      ),
+                      Divider(),
+                      ListTile( // Icone Sair
+                        title: Text(
+                          'Sair',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        leading: Icon(
+                          Icons.exit_to_app,
+                          color: Colors.red,
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaginaDeLogin(),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
-                  value: "editar",
                 ),
-                PopupMenuItem(
-                  child: Row(
-                    children: [
-                      Icon(Icons.exit_to_app, color: Colors.red),
-                      SizedBox(width: 8),
-                      Text("Sair", style: TextStyle(color: Colors.red)),
-                    ],
-                  ),
-                  value: "sair",
-                ),
-              ];
-            },
-            onSelected: (value) {
-              if (value == "editar") {
-                // função de editar
-              } else if (value == "sair") {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => PaginaDeLogin()));
-              }
-            },
+              ),
+            ],
           ),
-        ],
+        ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CircleAvatar(
-              radius: 50, // Raio do avatar
-              backgroundImage: AssetImage('caminho_da_sua_imagem.png'), // caminho do banco de dados
+              radius: 50,
+              // backgroundImage: AssetImage('caminho_da_sua_imagem.png'),
             ),
-            SizedBox(height: 16), // Espaço entre a foto de perfil e o nome
+            SizedBox(height: 16),
             Text(
               'Seu Nome',
               style: TextStyle(
