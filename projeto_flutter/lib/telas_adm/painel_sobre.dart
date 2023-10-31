@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:app_flutter/telas/login_page.dart';
-import 'package:app_flutter/telas/inicio_page.dart';
-import 'package:app_flutter/telas/perfil_page.dart';
-import 'package:app_flutter/telas/organizacao_page.dart';
-import 'package:app_flutter/telas/sobre_page.dart';
+import 'package:app_flutter/telas_adm/painel_organizacao.dart';
+import 'package:app_flutter/telas_adm/painel_projetos.dart';
+import 'package:app_flutter/telas_adm/painel_user.dart';
+import 'package:app_flutter/telas_adm/painel_sobre.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TelasTeste(),
+      home: VizualizarSobre(),
     );
   }
 }
 
-class TelasTeste extends StatelessWidget {
+class VizualizarSobre extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -26,14 +26,14 @@ class TelasTeste extends StatelessWidget {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
-          },
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
       drawer: Drawer(
         child: Container(
           child: Column(
@@ -67,49 +67,37 @@ class TelasTeste extends StatelessWidget {
                   child: ListView(
                     children: <Widget>[
                       ListTile(
-                        leading: Icon(Icons.home),
-                        title: Text('Início'),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => InicioPage(),
-                            ),
-                          );
-                        },
-                      ),
-                      ListTile(
                         leading: Icon(Icons.person),
-                        title: Text('Ver Perfil'),
+                        title: Text('Gerenciamento de Usuários'),
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PaginaPerfil(),
+                              builder: (context) => VisualizarUsuario(),
                             ),
                           );
                         },
                       ),
                       ListTile(
                         leading: Icon(Icons.business),
-                        title: Text('Organizações'),
+                        title: Text('Gerenciamento de Organização'),
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => OrganizacaoPage(),
+                              builder: (context) => VisualizarOrganizacao(),
                             ),
                           );
                         },
                       ),
                       ListTile(
-                        leading: Icon(Icons.info),
-                        title: Text('Sobre'),
+                        leading: Icon(Icons.photo_album_rounded),
+                        title: Text('Gerenciamento de Projeto'),
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => SobrePage(),
+                              builder: (context) => VisualizarProjetos(),
                             ),
                           );
                         },
@@ -145,7 +133,26 @@ class TelasTeste extends StatelessWidget {
         ),
       ),
       body: Center(
-        
+        child: Column(
+          children: <Widget>[
+            // Imagem
+            Image.asset(
+              'img/sobre_globo.png',
+              width: 200.0,
+              height: 200.0,
+            ),
+            SizedBox(height: 20),
+            Container(
+              margin: EdgeInsets.all(100),
+              child: Text(
+                'Bem-vindo ao sistema, a solução abrangente para gerenciar organizações e projetos de forma eficaz. Com nossa plataforma intuitiva, você pode criar, visualizar e manter informações detalhadas sobre organizações, ao mesmo tempo que simplifica o planejamento, execução e acompanhamento de projetos, tudo em um único lugar. Oferecemos integração total, suporte de qualidade e a visão de tornar o gerenciamento colaborativo acessível a todos. Estamos à disposição para ajudar.',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

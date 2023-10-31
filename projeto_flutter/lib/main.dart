@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app_flutter/telas/login_page.dart';
 import 'package:app_flutter/telas/organizacao_page.dart';
 import 'package:app_flutter/telas/perfil_page.dart';
-import 'package:app_flutter/telas/painel_adm.dart';
+import 'package:app_flutter/telas_adm/painel_adm.dart';
 import 'package:app_flutter/telas/sobre_page.dart';
 import 'package:app_flutter/telas/teste.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => PaginaDeLogin(),
         '/organizacao': (context) => OrganizacaoPage(),
         '/perfil': (context) => PaginaPerfil(),
-        '/paineladm': (context) => PanelAdm(),
+        '/paineladm': (context) => PainelAdm(),
         '/sobre': (context) => SobrePage(),
         '/teste': (context) => TelasTeste(),
       },
