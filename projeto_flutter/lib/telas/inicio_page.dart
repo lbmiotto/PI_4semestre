@@ -144,7 +144,20 @@ class InicioPage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text("Bem-vindo ao meu aplicativo!"),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            Image.asset(
+              'assets/img/inicio.png',
+              width: 400,
+              height: 400,
+            ),
+            Text(
+              'Boas-vindas à nossa aplicação! Estamos felizes em tê-lo aqui. Esperamos que aproveite cada recurso ao máximo.',
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
       ),
     );
   }
