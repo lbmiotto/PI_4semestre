@@ -3,7 +3,6 @@ import 'package:app_flutter/telas/login_page.dart';
 import 'package:app_flutter/telas_adm/painel_organizacao.dart';
 import 'package:app_flutter/telas_adm/painel_projetos.dart';
 import 'package:app_flutter/telas_adm/painel_user.dart';
-import 'package:app_flutter/telas_adm/painel_sobre.dart';
 
 void main() {
   runApp(MyApp());
