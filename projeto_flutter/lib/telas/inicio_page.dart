@@ -65,7 +65,8 @@ class InicioPage extends StatelessWidget {
                   color: Colors.white,
                   child: ListView(
                     children: <Widget>[
-                      ListTile( // ínicio
+                      ListTile(
+                        // ínicio
                         leading: Icon(Icons.home),
                         title: Text('Início'),
                         onTap: () {
@@ -77,7 +78,8 @@ class InicioPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Ver Perfil
+                      ListTile(
+                        // Ver Perfil
                         leading: Icon(Icons.person),
                         title: Text('Ver Perfil'),
                         onTap: () {
@@ -89,7 +91,8 @@ class InicioPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Organizações
+                      ListTile(
+                        // Organizações
                         leading: Icon(Icons.business),
                         title: Text('Organizações'),
                         onTap: () {
@@ -101,7 +104,8 @@ class InicioPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Sobre
+                      ListTile(
+                        // Sobre
                         leading: Icon(Icons.info),
                         title: Text('Sobre'),
                         onTap: () {
@@ -114,7 +118,8 @@ class InicioPage extends StatelessWidget {
                         },
                       ),
                       Divider(),
-                      ListTile( // Icone Sair
+                      ListTile(
+                        // Icone Sair
                         title: Text(
                           'Sair',
                           style: TextStyle(
@@ -144,9 +149,9 @@ class InicioPage extends StatelessWidget {
         ),
       ),
       body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
             Image.asset(
               'assets/img/inicio.png',
               width: 400,
@@ -155,10 +160,59 @@ class InicioPage extends StatelessWidget {
             Text(
               'Boas-vindas à nossa aplicação! Estamos felizes em tê-lo aqui. Esperamos que aproveite cada recurso ao máximo.',
               style: TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
             ),
+            SizedBox(height: 70),
+            Text(
+              'Veja algumas das nossas funções:',
+              style: TextStyle(fontSize: 20, color: Colors.blue, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 40),
+            Expanded(
+              child: ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  Wrap(
+                    alignment: WrapAlignment.spaceEvenly,
+                    children: [
+                      _buildCard('Gerenciamento de Usuários',
+                          'Esta função permite a administração completa dos usuários da sua aplicação. Você pode criar, editar, excluir e gerenciar os usuários. Isso é útil para controlar o acesso e as atividades de cada pessoa que utiliza a aplicação individualmente e controlar quem tem acesso aos dados'),
+                      _buildCard('Gerenciamento de Organização',
+                          'A função de gerenciamento de organização possibilita o controle e a organização das informações relacionadas à estrutura da sua empresa ou projeto. Você pode definir hierarquias, departamentos e categorias para facilitar a gestão e a análise de dados.'),
+                      _buildCard('Gerenciamento de Projetos',
+                          'Com essa função, você pode criar, atualizar e monitorar todos os aspectos dos projetos em andamento na sua aplicação. Isso inclui atribuir tarefas, definir metas, acompanhar o progresso e compartilhar informações relevantes entre os membros da equipe.'),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 40),
           ],
         ),
       ),
     );
   }
+}
+
+Widget _buildCard(String title, String text) {
+  return Container(
+    width: 440,
+    child: Card(
+      elevation: 4,
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            Text(
+              title,
+              style: TextStyle(color: Colors.blue, fontSize: 16),
+            ),
+            SizedBox(height: 10),
+            Text(text),
+          ],
+        ),
+      ),
+    ),
+  );
 }
