@@ -1,0 +1,3 @@
+from .usuario_views import CadastroNovoUsuarioView
+from .group_views import CadastroNovoGrupoView
+from .usergroup_views import AssociarUsuarioGrupoView
