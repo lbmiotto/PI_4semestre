@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:app_flutter/telas/inicio_page.dart';
 
 void main() {
   runApp(PaginaDeLogin());
@@ -20,8 +21,8 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
     String login = loginController.text;
     String senha = senhaController.text;
 
-    // URL do endpoint Django para cadastrar um novo usuário
-    String url = "http://localhost:8000/signup/";
+    // URL do endpoint Django para verificar login e senha
+    String url = "http://localhost:8000/login/";
 
     try {
       // Faz a solicitação POST para o Django
@@ -31,12 +32,20 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
         body: jsonEncode({"username": login, "password": senha}),
       );
 
-      // Verifica se a solicitação foi bem-sucedida (código de status 201)
-      if (response.statusCode == 201) {
-        print("Usuário cadastrado com sucesso!");
+      // Verifica se a solicitação foi bem-sucedida (código de status 200)
+      if (response.statusCode == 200) {
+        print("Login bem-sucedido!");
+        // Redireciona para a página InicioPage
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => InicioPage()),
+      );
+
+      } else if (response.statusCode == 401) {
+        print("Combinação de login e senha inválida.");
       } else {
         print(
-            "Erro ao cadastrar usuário. Código de status: ${response.statusCode}");
+            "Erro ao processar login. Código de status: ${response.statusCode}");
       }
     } catch (error) {
       print("Erro na solicitação HTTP: $error");
