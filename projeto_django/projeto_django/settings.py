@@ -15,6 +15,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 # pip install django-environ
 # python manage.py migrate
 # python manage.py runserver
+# http://localhost:8000/
 
 # CONTEUDO DO SELECT DAS QUERYS
 # SELECT * FROM auth_group
