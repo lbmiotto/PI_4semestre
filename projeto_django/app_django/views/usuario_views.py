@@ -30,6 +30,9 @@ class LoginView(views.APIView):
 
         if user is not None:
             login(request, user)
-            return Response({"message": "Login bem-sucedido!"}, status=status.HTTP_200_OK)
+
+            is_superuser = user.is_superuser if hasattr(user, 'is_superuser') else False
+
+            return Response({"message": "Login bem-sucedido!", "is_superuser": is_superuser}, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Combinação de login e senha inválida"}, status=status.HTTP_401_UNAUTHORIZED)

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:app_flutter/telas/inicio_page.dart';
+import 'package:app_flutter/telas_adm/painel_adm.dart';
 
 void main() {
   runApp(PaginaDeLogin());
@@ -25,7 +26,6 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
     String url = "http://localhost:8000/login/";
 
     try {
-      // Faz a solicitação POST para o Django
       var response = await http.post(
         Uri.parse(url),
         headers: {"Content-Type": "application/json"},
@@ -34,13 +34,25 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
 
       // Verifica se a solicitação foi bem-sucedida (código de status 200)
       if (response.statusCode == 200) {
-        print("Login bem-sucedido!");
-        // Redireciona para a página InicioPage
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => InicioPage()),
-      );
+        var responseData = jsonDecode(response.body);
+        bool isSuperuser = responseData['is_superuser'];
 
+        print("Login bem-sucedido!");
+
+        // Redireciona com base no valor de is_superuser
+        if (isSuperuser) {
+          // Redireciona para a página PainelAdm
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PainelAdm()),
+          );
+        } else {
+          // Redireciona para a página InicioPage
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => InicioPage()),
+          );
+        }
       } else if (response.statusCode == 401) {
         print("Combinação de login e senha inválida.");
       } else {
