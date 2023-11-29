@@ -16,10 +16,31 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
   final TextEditingController senhaController = TextEditingController();
   bool _senhaVisivel = false;
 
-  void processarLogin() {
+  void processarLogin() async {
     String login = loginController.text;
     String senha = senhaController.text;
-    // Faça o processamento do login aqui
+
+    // URL do endpoint Django para cadastrar um novo usuário
+    String url = "http://localhost:8000/signup/";
+
+    try {
+      // Faz a solicitação POST para o Django
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"username": login, "password": senha}),
+      );
+
+      // Verifica se a solicitação foi bem-sucedida (código de status 201)
+      if (response.statusCode == 201) {
+        print("Usuário cadastrado com sucesso!");
+      } else {
+        print(
+            "Erro ao cadastrar usuário. Código de status: ${response.statusCode}");
+      }
+    } catch (error) {
+      print("Erro na solicitação HTTP: $error");
+    }
   }
 
   @override
