@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:app_flutter/telas/inicio_page.dart';
 import 'package:app_flutter/telas_adm/painel_adm.dart';
+import 'package:app_flutter/telas_ghost/inicio_ghost.dart';
 
 void main() {
   runApp(PaginaDeLogin());
@@ -158,7 +159,10 @@ class _EstadoPaginaDeLogin extends State<PaginaDeLogin> {
                 SizedBox(height: 30.0),
                 TextButton(
                   onPressed: () {
-                    // Coloque aqui o código a ser executado quando o texto for clicado
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => InicioPageGhost()),
+                    );
                   },
                   child: Text(
                     'Entrar como usuário anônimo para teste',
