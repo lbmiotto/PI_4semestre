@@ -36,3 +36,25 @@ class LoginView(views.APIView):
             return Response({"message": "Login bem-sucedido!", "is_superuser": is_superuser}, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Combinação de login e senha inválida"}, status=status.HTTP_401_UNAUTHORIZED)
+
+class DeletarUsuarioView(views.APIView):
+    def delete(self, request, username):
+        try:
+            user = User.objects.get(username=username)
+            user.delete() 
+
+            return Response({"message": "Usuário excluído com sucesso"}, status=status.HTTP_204_NO_CONTENT)
+        except User.DoesNotExist:
+            return Response({"error": "Usuário não encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class ObterUsuarioView(views.APIView):
+    def get(self, request, format=None):
+        try:
+            usuarios = User.objects.all()
+            serialized_usuarios = [{"id": usuario.id, "username": usuario.username} for usuario in usuarios]
+
+            return Response(serialized_usuarios, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
