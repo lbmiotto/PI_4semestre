@@ -20,49 +20,59 @@ class VisualizarUsuario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter-Django Exemplo'),
+        title: Text('Painel de Administração de Usuários'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CadastrarUsuarioPage()),
-                );
-              },
-              child: Text('Cadastrar Usuário'),
+            SizedBox(
+              width: 200,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CadastrarUsuarioPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(200, 36),
+                ),
+                child: Text('Cadastrar Usuário'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DeletarUsuarioPage()),
-                );
-              },
-              child: Text('Deletar Usuário'),
+            SizedBox(height: 16),
+            SizedBox(
+              width: 200,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => DeletarUsuarioPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(200, 36),
+                ),
+                child: Text('Deletar Usuário'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AtualizarUsuarioPage()),
-                );
-              },
-              child: Text('Atualizar Usuário'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ObterUsuarioPage()),
-                );
-              },
-              child: Text('Obter Usuário'),
+            SizedBox(height: 16),
+            SizedBox(
+              width: 200,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ObterUsuarioPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(200, 36),
+                ),
+                child: Text('Obter Usuário'),
+              ),
             ),
           ],
         ),
@@ -188,21 +198,6 @@ class _DeletarUsuarioPageState extends State<DeletarUsuarioPage> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-// UPDATE USER DA TABELA
-class AtualizarUsuarioPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Obter Usuário'),
-      ),
-      body: Center(
-        child: Text('Página de Obter Usuário'),
       ),
     );
   }

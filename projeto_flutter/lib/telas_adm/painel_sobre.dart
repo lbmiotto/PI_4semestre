@@ -137,9 +137,9 @@ class VizualizarSobre extends StatelessWidget {
           children: <Widget>[
             // Imagem
             Image.asset(
-              'img/sobre_globo.png',
-              width: 200.0,
-              height: 200.0,
+              'img/sobre.png',
+              width: 500.0,
+              height: 500.0,
             ),
             SizedBox(height: 20),
             Container(
