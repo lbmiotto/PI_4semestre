@@ -38,6 +38,7 @@ class VizualizarSobre extends StatelessWidget {
           child: Column(
             children: [
               UserAccountsDrawerHeader(
+                decoration: BoxDecoration(color: Colors.blue),
                 accountName: Text(
                   'Nome',
                   style: TextStyle(
