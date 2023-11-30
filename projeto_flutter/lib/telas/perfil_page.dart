@@ -40,14 +40,14 @@ class PaginaPerfil extends StatelessWidget {
               UserAccountsDrawerHeader(
                 decoration: BoxDecoration(color: Colors.blue),
                 accountName: Text(
-                  'Nome',
+                  'Abaca',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 accountEmail: Text(
-                  'seu.email@example.com',
+                  'abaca1@gmail.com',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
@@ -66,7 +66,8 @@ class PaginaPerfil extends StatelessWidget {
                   color: Colors.white,
                   child: ListView(
                     children: <Widget>[
-                      ListTile( // ínicio
+                      ListTile(
+                        // ínicio
                         leading: Icon(Icons.home),
                         title: Text('Início'),
                         onTap: () {
@@ -78,7 +79,8 @@ class PaginaPerfil extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Ver Perfil
+                      ListTile(
+                        // Ver Perfil
                         leading: Icon(Icons.person),
                         title: Text('Ver Perfil'),
                         onTap: () {
@@ -90,7 +92,8 @@ class PaginaPerfil extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Organizações
+                      ListTile(
+                        // Organizações
                         leading: Icon(Icons.business),
                         title: Text('Organizações'),
                         onTap: () {
@@ -102,7 +105,8 @@ class PaginaPerfil extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Sobre
+                      ListTile(
+                        // Sobre
                         leading: Icon(Icons.info),
                         title: Text('Sobre'),
                         onTap: () {
@@ -115,7 +119,8 @@ class PaginaPerfil extends StatelessWidget {
                         },
                       ),
                       Divider(),
-                      ListTile( // Icone Sair
+                      ListTile(
+                        // Icone Sair
                         title: Text(
                           'Sair',
                           style: TextStyle(
@@ -154,7 +159,7 @@ class PaginaPerfil extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'Seu Nome',
+              'Abaca',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -162,7 +167,7 @@ class PaginaPerfil extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'seu.email@example.com',
+              'abaca1@gmail.com',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey,
@@ -172,35 +177,35 @@ class PaginaPerfil extends StatelessWidget {
             SizedBox(
               width: 600,
               child: TextFormField(
-                decoration: InputDecoration(labelText: 'Nome'),
+                decoration: InputDecoration(labelText: 'Abaca'),
               ),
             ),
             SizedBox(height: 16),
             SizedBox(
               width: 600,
               child: TextFormField(
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: InputDecoration(labelText: 'abaca1@gmail.com'),
               ),
             ),
             SizedBox(height: 16),
             SizedBox(
               width: 600,
               child: TextFormField(
-                decoration: InputDecoration(labelText: 'Celular'),
+                decoration: InputDecoration(labelText: '(11)94152-1004'),
               ),
             ),
             SizedBox(height: 16),
             SizedBox(
               width: 600,
               child: TextFormField(
-                decoration: InputDecoration(labelText: 'Endereço'),
+                decoration: InputDecoration(labelText: 'Av Marcelo Bio - 1923'),
               ),
             ),
             SizedBox(height: 16),
             SizedBox(
               width: 600,
               child: TextFormField(
-                decoration: InputDecoration(labelText: 'Nível de Acesso'),
+                decoration: InputDecoration(labelText: 'Funcionário'),
               ),
             ),
           ],
