@@ -4,6 +4,9 @@ import 'package:app_flutter/telas/inicio_page.dart';
 import 'package:app_flutter/telas/perfil_page.dart';
 import 'package:app_flutter/telas/organizacao_page.dart';
 import 'package:app_flutter/telas/sobre_page.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -46,6 +49,30 @@ class DetalhesProjetoPage extends StatelessWidget {
   final Projeto projeto;
 
   DetalhesProjetoPage(this.projeto);
+
+  Future<void> obterLinkDoMapa(int mapaId) async {
+  final response = await http.get(
+    Uri.parse("http://localhost:8000/maps/$mapaId/"),
+  );
+
+  if (response.statusCode == 200) {
+    final linkDoMapa = json.decode(response.body)['link_do_mapa'];
+    print("Seu mapa foi encontrado");
+
+    _abrirNovaAba(linkDoMapa);
+  } else {
+    print("Erro ao obter link do mapa: ${response.statusCode}");
+  }
+}
+
+
+  void _abrirNovaAba(String link) async {
+    if (await canLaunch(link)) {
+      await launch(link);
+    } else {
+      print("Erro ao abrir o link do mapa: $link");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +120,8 @@ class DetalhesProjetoPage extends StatelessWidget {
                   color: Colors.white,
                   child: ListView(
                     children: <Widget>[
-                      ListTile( // ínicio
+                      ListTile(
+                        // ínicio
                         leading: Icon(Icons.home),
                         title: Text('Início'),
                         onTap: () {
@@ -105,7 +133,8 @@ class DetalhesProjetoPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Ver Perfil
+                      ListTile(
+                        // Ver Perfil
                         leading: Icon(Icons.person),
                         title: Text('Ver Perfil'),
                         onTap: () {
@@ -117,7 +146,8 @@ class DetalhesProjetoPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Organizações
+                      ListTile(
+                        // Organizações
                         leading: Icon(Icons.business),
                         title: Text('Organizações'),
                         onTap: () {
@@ -129,7 +159,8 @@ class DetalhesProjetoPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Sobre
+                      ListTile(
+                        // Sobre
                         leading: Icon(Icons.info),
                         title: Text('Sobre'),
                         onTap: () {
@@ -142,7 +173,8 @@ class DetalhesProjetoPage extends StatelessWidget {
                         },
                       ),
                       Divider(),
-                      ListTile( // Icone Sair
+                      ListTile(
+                        // Icone Sair
                         title: Text(
                           'Sair',
                           style: TextStyle(
@@ -176,7 +208,8 @@ class DetalhesProjetoPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
                 Icon(Icons.business, size: 36, color: Colors.blue),
                 SizedBox(width: 8),
@@ -188,7 +221,8 @@ class DetalhesProjetoPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
                 Icon(Icons.description, size: 36, color: Colors.green),
                 SizedBox(width: 8),
@@ -200,7 +234,8 @@ class DetalhesProjetoPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
                 Icon(Icons.people, size: 36, color: Colors.orange),
                 SizedBox(width: 8),
@@ -212,7 +247,8 @@ class DetalhesProjetoPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
                 Icon(Icons.location_on, size: 36, color: Colors.red),
                 SizedBox(width: 8),
@@ -224,7 +260,8 @@ class DetalhesProjetoPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
                 Icon(Icons.date_range, size: 36, color: Colors.purple),
                 SizedBox(width: 8),
@@ -236,7 +273,8 @@ class DetalhesProjetoPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
                 Icon(Icons.date_range, size: 36, color: Colors.purple),
                 SizedBox(width: 8),
@@ -248,9 +286,12 @@ class DetalhesProjetoPage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center, // Alinhar itens ao centro
+              mainAxisAlignment:
+                  MainAxisAlignment.center, // Alinhar itens ao centro
               children: <Widget>[
-                Icon(Icons.book, size: 36, color: projeto.statusLeitura ? Colors.green : Colors.red),
+                Icon(Icons.book,
+                    size: 36,
+                    color: projeto.statusLeitura ? Colors.green : Colors.red),
                 SizedBox(width: 8),
                 Text(
                   "Status de Leitura: ${projeto.statusLeitura ? 'Lido' : 'Não Lido'}",
@@ -261,17 +302,11 @@ class DetalhesProjetoPage extends StatelessWidget {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                // Adicione ação para o botão "Ver Mapa"
+                obterLinkDoMapa(6);
               },
               child: Text("Ver Mapa"),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Adicione ação para o botão "Documentos"
-              },
-              child: Text("Documentos"),
-            ),
           ],
         ),
       ),
