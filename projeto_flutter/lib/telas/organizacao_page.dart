@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:app_flutter/telas/login_page.dart';
 import 'package:app_flutter/telas/inicio_page.dart';
@@ -18,37 +20,61 @@ class MinhaApp extends StatelessWidget {
   }
 }
 
-class OrganizacaoPage extends StatelessWidget {
+class Projeto {
+  final String nome;
+  final String descricao;
+
+  Projeto({required this.nome, required this.descricao});
+
+  factory Projeto.fromJson(Map<String, dynamic> json) {
+    return Projeto(
+      nome: json['name'],
+      descricao: json['desc'],
+    );
+  }
+}
+
+class OrganizacaoPage extends StatefulWidget {
+  @override
+  _OrganizacaoPageState createState() => _OrganizacaoPageState();
+}
+
+class _OrganizacaoPageState extends State<OrganizacaoPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<Projeto> projetos = [
-    Projeto(
-    "Projeto 1",
-    "Descrição do Projeto 1",
-    "Nome da Organização 1",
-    "Endereço do Projeto 1",
-    DateTime.now(),
-    DateTime.now(),
-    true,
-  ),
-  Projeto(
-    "Projeto 2",
-    "Descrição do Projeto 2",
-    "Nome da Organização 2",
-    "Endereço do Projeto 2",
-    DateTime.now(),
-    DateTime.now(),
-    true,
-  ),
-  Projeto(
-    "Projeto 3",
-    "Descrição do Projeto 3",
-    "Nome da Organização 3",
-    "Endereço do Projeto 3",
-    DateTime.now(),
-    DateTime.now(),
-    true,
-  ),
-  ];
+  List<Projeto> projetos = [];
+
+  @override
+  void initState() {
+    super.initState();
+    obterProjetos();
+  }
+
+  Future<void> obterProjetos() async {
+    String url = "http://localhost:8000/read_project/";
+
+    try {
+      var response = await http.get(
+        Uri.parse(url),
+        headers: {"Content-Type": "application/json"},
+      );
+
+      if (mounted) {
+        setState(() {
+          if (response.statusCode == 200) {
+            projetos =
+                List<Map<String, dynamic>>.from(json.decode(response.body))
+                    .map((projetoMap) => Projeto.fromJson(projetoMap))
+                    .toList();
+          } else {
+            print(
+                "Erro ao obter projetos. Código de status: ${response.statusCode}");
+          }
+        });
+      }
+    } catch (error) {
+      print("Erro na solicitação HTTP: $error");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +122,8 @@ class OrganizacaoPage extends StatelessWidget {
                   color: Colors.white,
                   child: ListView(
                     children: <Widget>[
-                      ListTile( // ínicio
+                      ListTile(
+                        // ínicio
                         leading: Icon(Icons.home),
                         title: Text('Início'),
                         onTap: () {
@@ -108,7 +135,8 @@ class OrganizacaoPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Ver Perfil
+                      ListTile(
+                        // Ver Perfil
                         leading: Icon(Icons.person),
                         title: Text('Ver Perfil'),
                         onTap: () {
@@ -120,7 +148,8 @@ class OrganizacaoPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Organizações
+                      ListTile(
+                        // Organizações
                         leading: Icon(Icons.business),
                         title: Text('Organizações'),
                         onTap: () {
@@ -132,7 +161,8 @@ class OrganizacaoPage extends StatelessWidget {
                           );
                         },
                       ),
-                      ListTile( // Sobre
+                      ListTile(
+                        // Sobre
                         leading: Icon(Icons.info),
                         title: Text('Sobre'),
                         onTap: () {
@@ -145,7 +175,8 @@ class OrganizacaoPage extends StatelessWidget {
                         },
                       ),
                       Divider(),
-                      ListTile( // Icone Sair
+                      ListTile(
+                        // Icone Sair
                         title: Text(
                           'Sair',
                           style: TextStyle(
@@ -177,10 +208,9 @@ class OrganizacaoPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            
             SizedBox(height: 20),
             Text(
-              "Nome da Organização",
+              "Seus Projetos",
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 20),
@@ -216,7 +246,8 @@ class OrganizacaoPage extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             projeto.nome,
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 8),
                           Text(projeto.descricao),
@@ -229,7 +260,8 @@ class OrganizacaoPage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => DetalhesProjetoPage(projeto),
+                                      builder: (context) =>
+                                          DetalhesProjetoPage(projeto),
                                     ),
                                   );
                                 },
