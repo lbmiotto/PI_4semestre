@@ -81,7 +81,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:51573",
+    "http://localhost:55905",
 ]
 
 ROOT_URLCONF = 'projeto_django.urls'
